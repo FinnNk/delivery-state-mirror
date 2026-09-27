@@ -1,0 +1,152 @@
+---
+# Source: search-spike/templates/environment.yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: lab-delivery-staging
+  labels:
+    lab: search-spike
+
+---
+# Source: search-spike/templates/environment.yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: search-boundary
+  namespace: lab-delivery-staging
+spec:
+  podSelector: {}
+  policyTypes: [Ingress, Egress]
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: platform
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: lab-evaluation
+          podSelector:
+            matchExpressions:
+              - {key: lab, operator: In, values: [gatling, evaluator]}
+      ports:
+        - port: 8080
+  egress:
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: kube-system
+      ports:
+        - {port: 53, protocol: UDP}
+        - {port: 53, protocol: TCP}
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: platform
+          podSelector:
+            matchLabels:
+              elasticsearch.k8s.elastic.co/cluster-name: shared
+      ports:
+        - port: 9200
+
+---
+# Source: search-spike/templates/environment.yaml
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: environment
+  namespace: lab-delivery-staging
+spec:
+  hard:
+    pods: '3'
+    requests.cpu: 250m
+    requests.memory: 128Mi
+    limits.cpu: '1'
+    limits.memory: 384Mi
+
+---
+# Source: search-spike/templates/environment.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: search
+  namespace: lab-delivery-staging
+spec:
+  selector:
+    app: search
+  ports:
+    - port: 8080
+
+---
+# Source: search-spike/templates/environment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: search
+  namespace: lab-delivery-staging
+  annotations:
+    lab/fingerprint: "00cd57233b8a30a6e452a82e7237e97892553c1408af21fc9aa1deb7e2845dea"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: search
+  template:
+    metadata:
+      labels:
+        app: search
+    spec:
+      automountServiceAccountToken: false
+      imagePullSecrets:
+        - name: nexus-read
+      containers:
+        - name: api
+          image: "nexus.localhost:18185/search-api@sha256:eb24a2fb8f9fdcd905c9abf230e0bcedd4393ce1939b469c601b2af1243a7613"
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: ES_URL
+              value: https://shared-es-http.platform.svc:9200
+            - name: ES_INDEX
+              value: "retail-gb-1m-v1"
+          envFrom:
+            - secretRef:
+                name: search-access
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            periodSeconds: 1
+          resources:
+            requests:
+              cpu: 25m
+              memory: 32Mi
+            limits:
+              cpu: 250m
+              memory: 96Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
+            runAsUser: 1000
+            capabilities:
+              drop: [ALL]
+          volumeMounts:
+            - name: es-ca
+              mountPath: /es-ca
+              readOnly: true
+      volumes:
+        - name: es-ca
+          secret:
+            secretName: es-ca
+---
+{
+  "apiVersion": "v1",
+  "kind": "ConfigMap",
+  "metadata": {
+    "name": "frozen-definition",
+    "namespace": "lab-delivery-staging"
+  },
+  "data": {
+    "definition.json": "{\"bundle_sha256\":\"6f3efc56ddacf4ffead53c07090f078835a5c06c67b36cf18cd40129f2036327\",\"dataset_release\":\"retail-gb-1m-v1\",\"dataset_sha256\":\"a6c78afb7df078016828a8a9a93b88b2d1db6a16ef64080a37dc33c23c2cc1d6\",\"engine\":\"9.5.4\",\"environment\":\"lab-delivery-staging\",\"fingerprint\":\"00cd57233b8a30a6e452a82e7237e97892553c1408af21fc9aa1deb7e2845dea\",\"image\":\"nexus.localhost:18185/search-api@sha256:eb24a2fb8f9fdcd905c9abf230e0bcedd4393ce1939b469c601b2af1243a7613\",\"index\":\"retail-gb-1m-v1\",\"index_recipe_sha256\":\"6ff8e47b2e6038fe03f2d99c6c351c5a50f0733d539d5af62a3f990f0c75edb1\",\"mapping_sha256\":\"d3dd2954162a449a0e9fff6f97135a9cdf474000181ede2b3283f0e60f1e7562\",\"request_context\":{\"country\":\"GB\",\"currency\":\"GBP\"},\"software_release_id\":\"c9b57fac10a6c72a0192fa4f74b50840e39bba7d02e78691a3e0a229a9e7141f\",\"source_sha\":\"b87f50acc0df7093649eddbb32bbda4fef26ad0a\"}"
+  }
+}
