@@ -84,7 +84,7 @@ metadata:
   name: search
   namespace: lab-delivery-integration
   annotations:
-    lab/fingerprint: "12cefb03f27895ab5ea2b033f2157b600366cd99782050a4fb257a2834865871"
+    lab/fingerprint: "df2e057cc9d889b9c08b96721cc2fc370579841d9f118b87777186212b4fe595"
 spec:
   replicas: 1
   selector:
@@ -100,13 +100,13 @@ spec:
         - name: nexus-read
       containers:
         - name: api
-          image: "nexus.localhost:18185/search-api@sha256:fceae45b08cf25024c63320e26399a8fdfdb5f717bd54071366714fd2f7294ab"
+          image: "nexus.localhost:18185/search-api@sha256:5baf7d1e328ab37b6073ffd956f5667045eea2c510a50c2be5d00378b0405876"
           imagePullPolicy: IfNotPresent
           env:
             - name: ES_URL
               value: https://shared-es-http.platform.svc:9200
             - name: ES_INDEX
-              value: "lab-release-83877e543505971653949399-idx"
+              value: "retail-gb-1m-v1"
           envFrom:
             - secretRef:
                 name: search-access
@@ -186,6 +186,6 @@ spec:
     "namespace": "lab-delivery-integration"
   },
   "data": {
-    "definition.json": "{\"bundle_sha256\":\"4fdd40bca358abd8bbd60deac81567eb81b2f49251d4fb723ca9ca5765f5905f\",\"catalogue_manifest_sha256\":\"83686fb7afb11d3a5e4f691a950a8ed4e9fc0dc23343c78f54849659cf9393f5\",\"dataset_release\":\"retail-gb-1m-v1\",\"dataset_sha256\":\"a6c78afb7df078016828a8a9a93b88b2d1db6a16ef64080a37dc33c23c2cc1d6\",\"engine\":\"9.5.4\",\"environment\":\"lab-delivery-integration\",\"fingerprint\":\"12cefb03f27895ab5ea2b033f2157b600366cd99782050a4fb257a2834865871\",\"image\":\"nexus.localhost:18185/search-api@sha256:fceae45b08cf25024c63320e26399a8fdfdb5f717bd54071366714fd2f7294ab\",\"index\":\"lab-release-83877e543505971653949399-idx\",\"index_recipe_sha256\":\"83877e5435059716539493991aad365104f9251d80c545b1f02f5ce6e2021c6e\",\"judgement_manifest_sha256\":\"690476679424fd789d5ed9021cdba7e4641117b19a255d6b790568deb02400c7\",\"mapping_sha256\":\"fcb66dd616b8f3bfacb26913fa961e6a0fcfd867933ad82b68dc358932658487\",\"query_manifest_sha256\":\"158e982e64a245ae2faf558284550c3dafefa5fd45e5634c488cc1e34929f868\",\"request_context\":{\"country\":\"GB\",\"currency\":\"GBP\"},\"software_release_id\":\"cf1ae1eb2a81f55d15fed832a85ca60cc287c0be11bdf44e7a8e1387d7803954\",\"source_sha\":\"494b1ffbcc1734c5ef111a2dbffc5430495d82b3\"}"
+    "definition.json": "{\"bundle_sha256\":\"6f3efc56ddacf4ffead53c07090f078835a5c06c67b36cf18cd40129f2036327\",\"dataset_release\":\"retail-gb-1m-v1\",\"dataset_sha256\":\"a6c78afb7df078016828a8a9a93b88b2d1db6a16ef64080a37dc33c23c2cc1d6\",\"engine\":\"9.5.4\",\"environment\":\"lab-delivery-integration\",\"fingerprint\":\"df2e057cc9d889b9c08b96721cc2fc370579841d9f118b87777186212b4fe595\",\"image\":\"nexus.localhost:18185/search-api@sha256:5baf7d1e328ab37b6073ffd956f5667045eea2c510a50c2be5d00378b0405876\",\"index\":\"retail-gb-1m-v1\",\"index_recipe_sha256\":\"6ff8e47b2e6038fe03f2d99c6c351c5a50f0733d539d5af62a3f990f0c75edb1\",\"mapping_sha256\":\"d3dd2954162a449a0e9fff6f97135a9cdf474000181ede2b3283f0e60f1e7562\",\"request_context\":{\"country\":\"GB\",\"currency\":\"GBP\"},\"software_release_id\":\"83b7244479b9deb79f374876ad7a409f1acae0965649bcf1dbaf8e6b01e714dd\",\"source_sha\":\"36949f0a6b4da099ed241bbb50ea65757b143815\"}"
   }
 }
