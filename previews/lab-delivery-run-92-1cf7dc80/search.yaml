@@ -1,0 +1,146 @@
+---
+# Source: search-spike/templates/environment.yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: lab-delivery-run-92-1cf7dc80
+  labels:
+    lab: search-spike
+
+---
+# Source: search-spike/templates/environment.yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: search-boundary
+  namespace: lab-delivery-run-92-1cf7dc80
+spec:
+  podSelector: {}
+  policyTypes: [Ingress, Egress]
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: platform
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: lab-evaluation
+          podSelector:
+            matchExpressions:
+              - {key: lab, operator: In, values: [gatling, evaluator]}
+      ports:
+        - port: 8080
+  egress:
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: kube-system
+      ports:
+        - {port: 53, protocol: UDP}
+        - {port: 53, protocol: TCP}
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: platform
+          podSelector:
+            matchLabels:
+              elasticsearch.k8s.elastic.co/cluster-name: shared
+      ports:
+        - port: 9200
+
+---
+# Source: search-spike/templates/environment.yaml
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: environment
+  namespace: lab-delivery-run-92-1cf7dc80
+spec:
+  hard:
+    pods: '3'
+    requests.cpu: 250m
+    requests.memory: 128Mi
+    limits.cpu: '1'
+    limits.memory: 384Mi
+
+---
+# Source: search-spike/templates/environment.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: search
+  namespace: lab-delivery-run-92-1cf7dc80
+spec:
+  selector:
+    app: search
+  ports:
+    - port: 8080
+
+---
+# Source: search-spike/templates/environment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: search
+  namespace: lab-delivery-run-92-1cf7dc80
+  annotations:
+    lab/fingerprint: "1cf7dc806c0a22183e09104b670e317fb2910370019affeffdbc148275d23cb8"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: search
+  template:
+    metadata:
+      labels:
+        app: search
+    spec:
+      automountServiceAccountToken: false
+      imagePullSecrets:
+        - name: nexus-read
+      containers:
+        - name: api
+          image: "nexus.localhost:18185/search-api@sha256:c558a51967c2812f0e8f6a7c0e6932acda8da45637d546594892fe20f244205c"
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: ES_URL
+              value: https://shared-es-http.platform.svc:9200
+            - name: ES_INDEX
+              value: "esci-gb-v1-rc5f6d204c4467d4c49f842e3"
+            - name: SEARCH_VARIANTS_JSON
+              value: "{\"default_variant\":\"ranker-a\",\"variants\":{\"ranker-a\":{\"field_boosts\":{\"brand\":2,\"description\":1,\"product_type\":3,\"title\":4}}}}"
+          envFrom:
+            - secretRef:
+                name: search-access
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            periodSeconds: 1
+          resources:
+            requests:
+              cpu: 25m
+              memory: 32Mi
+            limits:
+              cpu: 250m
+              memory: 96Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
+            runAsUser: 1000
+            capabilities:
+              drop: [ALL]
+          volumeMounts:
+            - name: es-ca
+              mountPath: /es-ca
+              readOnly: true
+      volumes:
+        - name: es-ca
+          secret:
+            secretName: es-ca
+---
+{"apiVersion": "v1", "kind": "ConfigMap", "metadata": {"name": "frozen-definition", "namespace": "lab-delivery-run-92-1cf7dc80"}, "data": {"definition.json": "{\"bundle_sha256\":\"15b8cecba988caaa439666b4ae89024ae3b1acae6d75a258668d1219180f361f\",\"catalogue_manifest_sha256\":\"f227ec73d131c087dc5ec4dc0fe8419200c3ccb84203254b36b0d516a12647d7\",\"dataset_release\":\"esci-gb-v1\",\"dataset_sha256\":\"dfe6cecbc7d745a728fbed59679be10af0532be69583f65dc078c8108c25ff50\",\"engine\":\"9.5.4\",\"environment\":\"lab-delivery-run-92-1cf7dc80\",\"fingerprint\":\"1cf7dc806c0a22183e09104b670e317fb2910370019affeffdbc148275d23cb8\",\"image\":\"nexus.localhost:18185/search-api@sha256:c558a51967c2812f0e8f6a7c0e6932acda8da45637d546594892fe20f244205c\",\"index\":\"esci-gb-v1-rc5f6d204c4467d4c49f842e3\",\"index_recipe_sha256\":\"c5f6d204c4467d4c49f842e32e37e2ccd442a2211b02268440ad213cd784fa4c\",\"judgement_manifest_sha256\":\"ee2c9c9cdc835604b74dd368381061f5c227689ea6ad736ed76c7b9fe25d4b8b\",\"mapping_sha256\":\"d3dd2954162a449a0e9fff6f97135a9cdf474000181ede2b3283f0e60f1e7562\",\"query_manifest_sha256\":\"e3da6abc3081137cf9e3c01d33d74e278a3abb2844c68a39088f6c4c49bfe0ce\",\"request_context\":{\"country\":\"GB\",\"currency\":\"GBP\"},\"software_release_id\":\"142025c6eadcaf3fc5136bf3e2f40874fff3034d2ee80172ba1220d8c3b8a636\",\"source_sha\":\"344662fc7c3b9035ca8b71369ac524bab2a68788\",\"variant_config_json\":\"{\\\"default_variant\\\":\\\"ranker-a\\\",\\\"variants\\\":{\\\"ranker-a\\\":{\\\"field_boosts\\\":{\\\"brand\\\":2,\\\"description\\\":1,\\\"product_type\\\":3,\\\"title\\\":4}}}}\"}"}}
+---
+{"apiVersion": "networking.k8s.io/v1", "kind": "NetworkPolicy", "metadata": {"name": "control-search-ingress", "namespace": "lab-delivery-run-92-1cf7dc80"}, "spec": {"podSelector": {}, "policyTypes": ["Ingress"], "ingress": [{"from": [{"namespaceSelector": {"matchLabels": {"kubernetes.io/metadata.name": "lab-control"}}, "podSelector": {"matchLabels": {"app": "lab-control"}}}], "ports": [{"port": 8080, "protocol": "TCP"}]}]}}
