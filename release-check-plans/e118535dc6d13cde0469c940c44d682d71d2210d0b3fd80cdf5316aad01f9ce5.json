@@ -1,0 +1,166 @@
+{
+  "additional_sets": [],
+  "edits": {
+    "additional_query_sets": [],
+    "reason": "This release adds documentation and focused query coverage without changing search behaviour. Require the standard checks to preserve results. Retain sneakers and redis-rewrites as report-only checks covering existing rewrites, all six Redis aliases, case variants and controls.",
+    "suites": [
+      {
+        "disposition": "report_only",
+        "id": "a557588d32656913a9bdfacaf7676f3fc16db1680eeb9288b55ca2daae5e85ab",
+        "reason": ""
+      },
+      {
+        "disposition": "report_only",
+        "id": "66fd42fd03417bf0e8ef15c2a0ce941007af450ac4b23eda4fae6ee78bb48d68",
+        "reason": ""
+      }
+    ],
+    "variants": [
+      {
+        "intent": "preserve-results",
+        "variant": "ranker-a"
+      }
+    ]
+  },
+  "kind": "release-check-plan",
+  "reviewer": "finnnk",
+  "schema_version": 1,
+  "suggestion": {
+    "ancestry": {
+      "diverged": false,
+      "merge_base": "890b616da309d34fbd4d6e99e1c0b16a5d1605bb",
+      "missing_declarations": []
+    },
+    "binding": {
+      "baseline": {
+        "build_run": 194,
+        "fields": {
+          "bundle_sha256": "c57c8300d65ae79a361bfcae8cc442ca7c583a086051433402449c2bb863d4df",
+          "catalogue_manifest_sha256": "f227ec73d131c087dc5ec4dc0fe8419200c3ccb84203254b36b0d516a12647d7",
+          "dataset_release": "esci-gb-v1",
+          "dataset_sha256": "dfe6cecbc7d745a728fbed59679be10af0532be69583f65dc078c8108c25ff50",
+          "engine": "9.5.4",
+          "image": "nexus.localhost:18185/search-api@sha256:1810ed22a5bdb117d961a1f30dee6326e9cc21588b60ec085128b08715dc0c29",
+          "index": "esci-gb-v1-rc5f6d204c4467d4c49f842e3",
+          "index_recipe_sha256": "c5f6d204c4467d4c49f842e32e37e2ccd442a2211b02268440ad213cd784fa4c",
+          "judgement_manifest_sha256": "ee2c9c9cdc835604b74dd368381061f5c227689ea6ad736ed76c7b9fe25d4b8b",
+          "mapping_sha256": "d3dd2954162a449a0e9fff6f97135a9cdf474000181ede2b3283f0e60f1e7562",
+          "query_manifest_sha256": "e3da6abc3081137cf9e3c01d33d74e278a3abb2844c68a39088f6c4c49bfe0ce",
+          "request_context": {
+            "country": "GB",
+            "currency": "GBP"
+          },
+          "rewrite_dataset_sha256": "6893a8d5c147acc0f9ec46f67a696e6092c4f07b7e7bce72aa9ca0b194099f44",
+          "rewrite_redis_key": "rewrite:6893a8d5c147acc0f9ec46f67a696e6092c4f07b7e7bce72aa9ca0b194099f44",
+          "software_release_id": "f0c1f78677f17435128e1c36b9176c3196ba2e346a099f1988b22c35771fd243",
+          "software_version": "1.2.0+build.194.1",
+          "source_sha": "890b616da309d34fbd4d6e99e1c0b16a5d1605bb",
+          "variant_config_json": "{\"default_variant\":\"ranker-a\",\"variants\":{\"ranker-a\":{\"field_boosts\":{\"brand\":2,\"description\":1,\"product_type\":3,\"title\":4}}}}"
+        },
+        "fingerprint": "609ba3b1340e99a90eee3f9dca796260550cb8ecc0083cf26b97b6f688599be8"
+      },
+      "baseline_variant": {
+        "build_run": 194,
+        "configuration_sha256": "047f11df6c57b60a0f424e185042bb91039c3c29436091f227eaafed38ed3acc",
+        "deployment_fingerprint": "609ba3b1340e99a90eee3f9dca796260550cb8ecc0083cf26b97b6f688599be8",
+        "settings": {
+          "field_boosts": {
+            "brand": 2,
+            "description": 1,
+            "product_type": 3,
+            "title": 4
+          }
+        },
+        "variant": "ranker-a"
+      },
+      "candidate": {
+        "build_run": 204,
+        "fields": {
+          "bundle_sha256": "59c686777e16bb058d817922c37037ab07b4fd7197190077514af731a2e093dd",
+          "catalogue_manifest_sha256": "f227ec73d131c087dc5ec4dc0fe8419200c3ccb84203254b36b0d516a12647d7",
+          "dataset_release": "esci-gb-v1",
+          "dataset_sha256": "dfe6cecbc7d745a728fbed59679be10af0532be69583f65dc078c8108c25ff50",
+          "engine": "9.5.4",
+          "image": "nexus.localhost:18185/search-api@sha256:6918b91aa88939ccff916bb5b35d4efbd22e3ad758af38659d473c59f47498fe",
+          "index": "esci-gb-v1-rc5f6d204c4467d4c49f842e3",
+          "index_recipe_sha256": "c5f6d204c4467d4c49f842e32e37e2ccd442a2211b02268440ad213cd784fa4c",
+          "judgement_manifest_sha256": "ee2c9c9cdc835604b74dd368381061f5c227689ea6ad736ed76c7b9fe25d4b8b",
+          "mapping_sha256": "d3dd2954162a449a0e9fff6f97135a9cdf474000181ede2b3283f0e60f1e7562",
+          "query_manifest_sha256": "e3da6abc3081137cf9e3c01d33d74e278a3abb2844c68a39088f6c4c49bfe0ce",
+          "request_context": {
+            "country": "GB",
+            "currency": "GBP"
+          },
+          "rewrite_dataset_sha256": "6893a8d5c147acc0f9ec46f67a696e6092c4f07b7e7bce72aa9ca0b194099f44",
+          "rewrite_redis_key": "rewrite:6893a8d5c147acc0f9ec46f67a696e6092c4f07b7e7bce72aa9ca0b194099f44",
+          "software_release_id": "b43754ebbb9d86a5481375be37e5f2d18d4cfb108a31c18f63ebb3850c1934b4",
+          "software_version": "1.2.2+build.204.1",
+          "source_sha": "c83307104982ac25099175e23a1049fcfbfa3040",
+          "variant_config_json": "{\"default_variant\":\"ranker-a\",\"variants\":{\"ranker-a\":{\"field_boosts\":{\"brand\":2,\"description\":1,\"product_type\":3,\"title\":4}}}}"
+        },
+        "fingerprint": "611a583c798d2786f601bf0da5cc3919b9dcc221256cbf8b0163d24e392a3ed2"
+      },
+      "policy_sha256": "5e9e6e30bbaaa6e0d47482a37a948bb4ee75005ee9898c214ac3d670f6f84e63",
+      "primary_query_sets": [
+        {
+          "judgement_manifest_sha256": "ee2c9c9cdc835604b74dd368381061f5c227689ea6ad736ed76c7b9fe25d4b8b",
+          "name": "standard",
+          "query_manifest_sha256": "e3da6abc3081137cf9e3c01d33d74e278a3abb2844c68a39088f6c4c49bfe0ce"
+        }
+      ],
+      "target": "integration"
+    },
+    "changes": [
+      {
+        "side": "candidate",
+        "source_sha": "93809586ef005988b39edde4bac9a034e8d4ab8f",
+        "title": "Document reviewed checks for accumulated releases"
+      },
+      {
+        "side": "candidate",
+        "source_sha": "f85c4e7e87b4bff2321ff07c893bee22cc36384f",
+        "title": "Bump patch version for the release check plan guide"
+      },
+      {
+        "side": "candidate",
+        "source_sha": "c83307104982ac25099175e23a1049fcfbfa3040",
+        "title": "Cover every shared Redis rewrite in additional comparisons"
+      }
+    ],
+    "suites": [
+      {
+        "id": "a557588d32656913a9bdfacaf7676f3fc16db1680eeb9288b55ca2daae5e85ab",
+        "judgement_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "name": "sneakers",
+        "origins": [
+          "890b616da309d34fbd4d6e99e1c0b16a5d1605bb",
+          "93809586ef005988b39edde4bac9a034e8d4ab8f",
+          "f85c4e7e87b4bff2321ff07c893bee22cc36384f",
+          "c83307104982ac25099175e23a1049fcfbfa3040"
+        ],
+        "path": "evaluation/queries/sneakers.jsonl",
+        "query_sha256": "dac924fff7a536191025f06b6f757de725d74a3429a6c598d7c905457f02e3e1",
+        "required": false,
+        "source_sha": "890b616da309d34fbd4d6e99e1c0b16a5d1605bb"
+      },
+      {
+        "id": "66fd42fd03417bf0e8ef15c2a0ce941007af450ac4b23eda4fae6ee78bb48d68",
+        "judgement_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "name": "redis-rewrites",
+        "origins": [
+          "c83307104982ac25099175e23a1049fcfbfa3040"
+        ],
+        "path": "evaluation/queries/redis-rewrites.jsonl",
+        "query_sha256": "28dcb119704dd534329b20a85ce3ceb8ad4d146ae63524fdb70bef9c9d394a3e",
+        "required": false,
+        "source_sha": "c83307104982ac25099175e23a1049fcfbfa3040"
+      }
+    ],
+    "variants": [
+      {
+        "intent": "preserve-results",
+        "variant": "ranker-a"
+      }
+    ]
+  }
+}
