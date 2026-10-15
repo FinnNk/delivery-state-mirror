@@ -1,0 +1,64 @@
+{
+  "base_revision": "a2f24af56a0f0060a535a6e7ff7fe7731e23ab49",
+  "baseline_variant": {
+    "build_run": 158,
+    "configuration_sha256": "047f11df6c57b60a0f424e185042bb91039c3c29436091f227eaafed38ed3acc",
+    "deployment_fingerprint": "cfceaa2279cf2a64fc70ecb07acf6ebb18c41d2a23359e9c08217efd0d75e71c",
+    "settings": {
+      "field_boosts": {
+        "brand": 2,
+        "description": 1,
+        "product_type": 3,
+        "title": 4
+      }
+    },
+    "variant": "default"
+  },
+  "deployment": {
+    "build_run": 184,
+    "fields": {
+      "bundle_sha256": "cea8e5dee5988b54491d8df7ed195aacc09b89f09a5eb797422ac25d8d98dfa7",
+      "catalogue_manifest_sha256": "f227ec73d131c087dc5ec4dc0fe8419200c3ccb84203254b36b0d516a12647d7",
+      "dataset_release": "esci-gb-v1",
+      "dataset_sha256": "dfe6cecbc7d745a728fbed59679be10af0532be69583f65dc078c8108c25ff50",
+      "engine": "9.5.4",
+      "image": "nexus.localhost:18185/search-api@sha256:c52968c96c0c16e6aa78aa63271c584620f87287ebe593214145c170a7981847",
+      "index": "esci-gb-v1-rc5f6d204c4467d4c49f842e3",
+      "index_recipe_sha256": "c5f6d204c4467d4c49f842e32e37e2ccd442a2211b02268440ad213cd784fa4c",
+      "judgement_manifest_sha256": "ee2c9c9cdc835604b74dd368381061f5c227689ea6ad736ed76c7b9fe25d4b8b",
+      "mapping_sha256": "d3dd2954162a449a0e9fff6f97135a9cdf474000181ede2b3283f0e60f1e7562",
+      "query_manifest_sha256": "e3da6abc3081137cf9e3c01d33d74e278a3abb2844c68a39088f6c4c49bfe0ce",
+      "request_context": {
+        "country": "GB",
+        "currency": "GBP"
+      },
+      "rewrite_dataset_sha256": "6893a8d5c147acc0f9ec46f67a696e6092c4f07b7e7bce72aa9ca0b194099f44",
+      "rewrite_redis_key": "rewrite:6893a8d5c147acc0f9ec46f67a696e6092c4f07b7e7bce72aa9ca0b194099f44",
+      "software_release_id": "5c84460d37f115099bc0223ea91df81f306619d20d40007c22f33ad24a8b6184",
+      "software_version": "1.1.1+build.184.1",
+      "source_sha": "8b32d1a196d09d28fd966345a9d337e93f76aaab",
+      "variant_config_json": "{\"default_variant\":\"ranker-a\",\"variants\":{\"ranker-a\":{\"field_boosts\":{\"brand\":2,\"description\":1,\"product_type\":3,\"title\":4}}}}"
+    },
+    "fingerprint": "ad3fb34fb095ff5c7cdcc5b9de92ec79773e293ed2621a155d49351459a558dd"
+  },
+  "evidence": {
+    "blob": "runs/9d91a20b083b34e9d89379c9074e089644550d59ececaab3e0ec65dc1aab7591/delivery-variant-evidence.json",
+    "sha256": "9d91a20b083b34e9d89379c9074e089644550d59ececaab3e0ec65dc1aab7591"
+  },
+  "expected_target": "cfceaa2279cf2a64fc70ecb07acf6ebb18c41d2a23359e9c08217efd0d75e71c",
+  "format": 1,
+  "kind": "promotion",
+  "source_target": null,
+  "target": "integration",
+  "variant_checks": [
+    {
+      "evidence": {
+        "blob": "runs/a9056026d6d34909af73fde098f45a51318951de7cf2638d368edeb673258696/delivery-evidence.json",
+        "sha256": "a9056026d6d34909af73fde098f45a51318951de7cf2638d368edeb673258696"
+      },
+      "intent": "ranking-change",
+      "state": "pass",
+      "variant": "ranker-a"
+    }
+  ]
+}
