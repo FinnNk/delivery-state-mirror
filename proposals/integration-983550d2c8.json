@@ -1,0 +1,64 @@
+{
+  "base_revision": "129e46f3977dd6ca061e282f9b252d12dff0993f",
+  "baseline_variant": {
+    "build_run": 184,
+    "configuration_sha256": "047f11df6c57b60a0f424e185042bb91039c3c29436091f227eaafed38ed3acc",
+    "deployment_fingerprint": "ad3fb34fb095ff5c7cdcc5b9de92ec79773e293ed2621a155d49351459a558dd",
+    "settings": {
+      "field_boosts": {
+        "brand": 2,
+        "description": 1,
+        "product_type": 3,
+        "title": 4
+      }
+    },
+    "variant": "ranker-a"
+  },
+  "deployment": {
+    "build_run": 194,
+    "fields": {
+      "bundle_sha256": "c57c8300d65ae79a361bfcae8cc442ca7c583a086051433402449c2bb863d4df",
+      "catalogue_manifest_sha256": "f227ec73d131c087dc5ec4dc0fe8419200c3ccb84203254b36b0d516a12647d7",
+      "dataset_release": "esci-gb-v1",
+      "dataset_sha256": "dfe6cecbc7d745a728fbed59679be10af0532be69583f65dc078c8108c25ff50",
+      "engine": "9.5.4",
+      "image": "nexus.localhost:18185/search-api@sha256:1810ed22a5bdb117d961a1f30dee6326e9cc21588b60ec085128b08715dc0c29",
+      "index": "esci-gb-v1-rc5f6d204c4467d4c49f842e3",
+      "index_recipe_sha256": "c5f6d204c4467d4c49f842e32e37e2ccd442a2211b02268440ad213cd784fa4c",
+      "judgement_manifest_sha256": "ee2c9c9cdc835604b74dd368381061f5c227689ea6ad736ed76c7b9fe25d4b8b",
+      "mapping_sha256": "d3dd2954162a449a0e9fff6f97135a9cdf474000181ede2b3283f0e60f1e7562",
+      "query_manifest_sha256": "e3da6abc3081137cf9e3c01d33d74e278a3abb2844c68a39088f6c4c49bfe0ce",
+      "request_context": {
+        "country": "GB",
+        "currency": "GBP"
+      },
+      "rewrite_dataset_sha256": "6893a8d5c147acc0f9ec46f67a696e6092c4f07b7e7bce72aa9ca0b194099f44",
+      "rewrite_redis_key": "rewrite:6893a8d5c147acc0f9ec46f67a696e6092c4f07b7e7bce72aa9ca0b194099f44",
+      "software_release_id": "f0c1f78677f17435128e1c36b9176c3196ba2e346a099f1988b22c35771fd243",
+      "software_version": "1.2.0+build.194.1",
+      "source_sha": "890b616da309d34fbd4d6e99e1c0b16a5d1605bb",
+      "variant_config_json": "{\"default_variant\":\"ranker-a\",\"variants\":{\"ranker-a\":{\"field_boosts\":{\"brand\":2,\"description\":1,\"product_type\":3,\"title\":4}}}}"
+    },
+    "fingerprint": "609ba3b1340e99a90eee3f9dca796260550cb8ecc0083cf26b97b6f688599be8"
+  },
+  "evidence": {
+    "blob": "runs/baddd42c7e9489235ad6497cb5cc6f7421178831b957c28f42bc972db35fe26e/delivery-variant-evidence.json",
+    "sha256": "baddd42c7e9489235ad6497cb5cc6f7421178831b957c28f42bc972db35fe26e"
+  },
+  "expected_target": "ad3fb34fb095ff5c7cdcc5b9de92ec79773e293ed2621a155d49351459a558dd",
+  "format": 1,
+  "kind": "promotion",
+  "source_target": null,
+  "target": "integration",
+  "variant_checks": [
+    {
+      "evidence": {
+        "blob": "runs/f88f118e7a3472445a8c2f2f19b01a76eb6f317b49aa813798bc93480b804676/delivery-evidence.json",
+        "sha256": "f88f118e7a3472445a8c2f2f19b01a76eb6f317b49aa813798bc93480b804676"
+      },
+      "intent": "preserve-results",
+      "state": "pass",
+      "variant": "ranker-a"
+    }
+  ]
+}
