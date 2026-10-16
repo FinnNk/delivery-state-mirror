@@ -1,0 +1,234 @@
+---
+# Source: search-spike/templates/environment.yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: lab-delivery-run-204-b0d741b5
+  labels:
+    lab: search-spike
+
+---
+# Source: search-spike/templates/environment.yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: search-boundary
+  namespace: lab-delivery-run-204-b0d741b5
+spec:
+  podSelector: {}
+  policyTypes: [Ingress, Egress]
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: platform
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: lab-evaluation
+          podSelector:
+            matchExpressions:
+              - {key: lab, operator: In, values: [gatling, evaluator]}
+      ports:
+        - port: 8080
+  egress:
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: platform
+          podSelector:
+            matchLabels:
+              app: lab-redis
+      ports:
+        - port: 6379
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: kube-system
+      ports:
+        - {port: 53, protocol: UDP}
+        - {port: 53, protocol: TCP}
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: platform
+          podSelector:
+            matchLabels:
+              elasticsearch.k8s.elastic.co/cluster-name: shared
+      ports:
+        - port: 9200
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: lab-observability
+          podSelector:
+            matchLabels:
+              app: lab-otel-gateway
+      ports:
+        - port: 4318
+
+---
+# Source: search-spike/templates/environment.yaml
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: environment
+  namespace: lab-delivery-run-204-b0d741b5
+spec:
+  hard:
+    pods: '3'
+    requests.cpu: 250m
+    requests.memory: 128Mi
+    limits.cpu: '1'
+    limits.memory: 384Mi
+
+---
+# Source: search-spike/templates/environment.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: search
+  namespace: lab-delivery-run-204-b0d741b5
+spec:
+  selector:
+    app: search
+  ports:
+    - port: 8080
+
+---
+# Source: search-spike/templates/environment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: search
+  namespace: lab-delivery-run-204-b0d741b5
+  annotations:
+    lab/fingerprint: "b0d741b5d45f7500da2fcf2c14da90cdc1fe3b61f0704fcdb39394a9928c07de"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: search
+  template:
+    metadata:
+      labels:
+        app: search
+    spec:
+      automountServiceAccountToken: false
+      imagePullSecrets:
+        - name: nexus-read
+      containers:
+        - name: api
+          image: "nexus.localhost:18185/search-api@sha256:6918b91aa88939ccff916bb5b35d4efbd22e3ad758af38659d473c59f47498fe"
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: ES_URL
+              value: https://shared-es-http.platform.svc:9200
+            - name: ES_INDEX
+              value: "esci-gb-v1-rc5f6d204c4467d4c49f842e3"
+            - name: REWRITE_REDIS_HOST
+              value: lab-redis.platform.svc.cluster.local
+            - name: REWRITE_REDIS_KEY
+              value: "rewrite:6893a8d5c147acc0f9ec46f67a696e6092c4f07b7e7bce72aa9ca0b194099f44"
+            - name: REWRITE_CATALOGUE_SHA256
+              value: "dfe6cecbc7d745a728fbed59679be10af0532be69583f65dc078c8108c25ff50"
+            - name: SEARCH_VARIANTS_JSON
+              value: "{\"default_variant\":\"ranker-a\",\"variants\":{\"baseline\":{\"field_boosts\":{\"brand\":2,\"description\":1,\"product_type\":3,\"title\":4}},\"ranker-a\":{\"field_boosts\":{\"brand\":2,\"description\":1,\"product_type\":3,\"title\":4}}}}"
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: http://lab-otel-gateway.lab-observability.svc.cluster.local:4318
+            - name: LAB_RELEASE_SHA
+              value: "nexus.localhost:18185/search-api@sha256:6918b91aa88939ccff916bb5b35d4efbd22e3ad758af38659d473c59f47498fe"
+            - name: SOFTWARE_VERSION
+              value: "1.2.2+build.204.1"
+            - name: SOURCE_SHA
+              value: "c83307104982ac25099175e23a1049fcfbfa3040"
+            - name: LAB_DEPLOYMENT_TIER
+              value: "lab-delivery-run-204-b0d741b5"
+          envFrom:
+            - secretRef:
+                name: search-access
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            periodSeconds: 1
+          resources:
+            requests:
+              cpu: 25m
+              memory: 32Mi
+            limits:
+              cpu: 250m
+              memory: 96Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
+            runAsUser: 1000
+            capabilities:
+              drop: [ALL]
+          volumeMounts:
+            - name: release-status
+              mountPath: /release-status
+              readOnly: true
+            - name: es-ca
+              mountPath: /es-ca
+              readOnly: true
+      volumes:
+        - name: release-status
+          configMap:
+            name: release-status-b0d741b5d45f7500da2fcf2c
+            optional: true
+        - name: es-ca
+          secret:
+            secretName: es-ca
+---
+{
+  "apiVersion": "networking.k8s.io/v1",
+  "kind": "NetworkPolicy",
+  "metadata": {
+    "name": "control-search-ingress",
+    "namespace": "lab-delivery-run-204-b0d741b5"
+  },
+  "spec": {
+    "podSelector": {},
+    "policyTypes": [
+      "Ingress"
+    ],
+    "ingress": [
+      {
+        "from": [
+          {
+            "namespaceSelector": {
+              "matchLabels": {
+                "kubernetes.io/metadata.name": "lab-control"
+              }
+            },
+            "podSelector": {
+              "matchLabels": {
+                "app": "lab-control"
+              }
+            }
+          }
+        ],
+        "ports": [
+          {
+            "port": 8080,
+            "protocol": "TCP"
+          }
+        ]
+      }
+    ]
+  }
+}
+---
+{
+  "apiVersion": "v1",
+  "kind": "ConfigMap",
+  "metadata": {
+    "name": "frozen-definition",
+    "namespace": "lab-delivery-run-204-b0d741b5"
+  },
+  "data": {
+    "definition.json": "{\"bundle_sha256\":\"59c686777e16bb058d817922c37037ab07b4fd7197190077514af731a2e093dd\",\"catalogue_manifest_sha256\":\"f227ec73d131c087dc5ec4dc0fe8419200c3ccb84203254b36b0d516a12647d7\",\"dataset_release\":\"esci-gb-v1\",\"dataset_sha256\":\"dfe6cecbc7d745a728fbed59679be10af0532be69583f65dc078c8108c25ff50\",\"engine\":\"9.5.4\",\"environment\":\"lab-delivery-run-204-b0d741b5\",\"fingerprint\":\"b0d741b5d45f7500da2fcf2c14da90cdc1fe3b61f0704fcdb39394a9928c07de\",\"image\":\"nexus.localhost:18185/search-api@sha256:6918b91aa88939ccff916bb5b35d4efbd22e3ad758af38659d473c59f47498fe\",\"index\":\"esci-gb-v1-rc5f6d204c4467d4c49f842e3\",\"index_recipe_sha256\":\"c5f6d204c4467d4c49f842e32e37e2ccd442a2211b02268440ad213cd784fa4c\",\"judgement_manifest_sha256\":\"ee2c9c9cdc835604b74dd368381061f5c227689ea6ad736ed76c7b9fe25d4b8b\",\"mapping_sha256\":\"d3dd2954162a449a0e9fff6f97135a9cdf474000181ede2b3283f0e60f1e7562\",\"query_manifest_sha256\":\"e3da6abc3081137cf9e3c01d33d74e278a3abb2844c68a39088f6c4c49bfe0ce\",\"request_context\":{\"country\":\"GB\",\"currency\":\"GBP\"},\"rewrite_dataset_sha256\":\"6893a8d5c147acc0f9ec46f67a696e6092c4f07b7e7bce72aa9ca0b194099f44\",\"rewrite_redis_key\":\"rewrite:6893a8d5c147acc0f9ec46f67a696e6092c4f07b7e7bce72aa9ca0b194099f44\",\"software_release_id\":\"b43754ebbb9d86a5481375be37e5f2d18d4cfb108a31c18f63ebb3850c1934b4\",\"software_version\":\"1.2.2+build.204.1\",\"source_sha\":\"c83307104982ac25099175e23a1049fcfbfa3040\",\"variant_config_json\":\"{\\\"default_variant\\\":\\\"ranker-a\\\",\\\"variants\\\":{\\\"baseline\\\":{\\\"field_boosts\\\":{\\\"brand\\\":2,\\\"description\\\":1,\\\"product_type\\\":3,\\\"title\\\":4}},\\\"ranker-a\\\":{\\\"field_boosts\\\":{\\\"brand\\\":2,\\\"description\\\":1,\\\"product_type\\\":3,\\\"title\\\":4}}}}\"}"
+  }
+}
