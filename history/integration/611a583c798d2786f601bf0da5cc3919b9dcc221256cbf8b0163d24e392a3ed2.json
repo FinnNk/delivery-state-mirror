@@ -1,0 +1,27 @@
+{
+  "build_run": 204,
+  "fields": {
+    "bundle_sha256": "59c686777e16bb058d817922c37037ab07b4fd7197190077514af731a2e093dd",
+    "catalogue_manifest_sha256": "f227ec73d131c087dc5ec4dc0fe8419200c3ccb84203254b36b0d516a12647d7",
+    "dataset_release": "esci-gb-v1",
+    "dataset_sha256": "dfe6cecbc7d745a728fbed59679be10af0532be69583f65dc078c8108c25ff50",
+    "engine": "9.5.4",
+    "image": "nexus.localhost:18185/search-api@sha256:6918b91aa88939ccff916bb5b35d4efbd22e3ad758af38659d473c59f47498fe",
+    "index": "esci-gb-v1-rc5f6d204c4467d4c49f842e3",
+    "index_recipe_sha256": "c5f6d204c4467d4c49f842e32e37e2ccd442a2211b02268440ad213cd784fa4c",
+    "judgement_manifest_sha256": "ee2c9c9cdc835604b74dd368381061f5c227689ea6ad736ed76c7b9fe25d4b8b",
+    "mapping_sha256": "d3dd2954162a449a0e9fff6f97135a9cdf474000181ede2b3283f0e60f1e7562",
+    "query_manifest_sha256": "e3da6abc3081137cf9e3c01d33d74e278a3abb2844c68a39088f6c4c49bfe0ce",
+    "request_context": {
+      "country": "GB",
+      "currency": "GBP"
+    },
+    "rewrite_dataset_sha256": "6893a8d5c147acc0f9ec46f67a696e6092c4f07b7e7bce72aa9ca0b194099f44",
+    "rewrite_redis_key": "rewrite:6893a8d5c147acc0f9ec46f67a696e6092c4f07b7e7bce72aa9ca0b194099f44",
+    "software_release_id": "b43754ebbb9d86a5481375be37e5f2d18d4cfb108a31c18f63ebb3850c1934b4",
+    "software_version": "1.2.2+build.204.1",
+    "source_sha": "c83307104982ac25099175e23a1049fcfbfa3040",
+    "variant_config_json": "{\"default_variant\":\"ranker-a\",\"variants\":{\"ranker-a\":{\"field_boosts\":{\"brand\":2,\"description\":1,\"product_type\":3,\"title\":4}}}}"
+  },
+  "fingerprint": "611a583c798d2786f601bf0da5cc3919b9dcc221256cbf8b0163d24e392a3ed2"
+}
