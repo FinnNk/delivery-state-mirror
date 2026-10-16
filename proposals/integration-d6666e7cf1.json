@@ -1,0 +1,74 @@
+{
+  "base_revision": "22ddf797e99c859995f941de0d5d38d9408ef024",
+  "baseline_variant": {
+    "build_run": 204,
+    "configuration_sha256": "047f11df6c57b60a0f424e185042bb91039c3c29436091f227eaafed38ed3acc",
+    "deployment_fingerprint": "611a583c798d2786f601bf0da5cc3919b9dcc221256cbf8b0163d24e392a3ed2",
+    "settings": {
+      "field_boosts": {
+        "brand": 2,
+        "description": 1,
+        "product_type": 3,
+        "title": 4
+      }
+    },
+    "variant": "ranker-a"
+  },
+  "deployment": {
+    "build_run": 207,
+    "fields": {
+      "bundle_sha256": "2775a534d5392c5f58f1cec00172d331876fa98aa2114a36f017fce2db8277c2",
+      "catalogue_manifest_sha256": "f227ec73d131c087dc5ec4dc0fe8419200c3ccb84203254b36b0d516a12647d7",
+      "dataset_release": "esci-gb-v1",
+      "dataset_sha256": "dfe6cecbc7d745a728fbed59679be10af0532be69583f65dc078c8108c25ff50",
+      "engine": "9.5.4",
+      "image": "nexus.localhost:18185/search-api@sha256:363ac36b0bc054e412d017a2c62b8f3442b3a11c3e49f93f37f19b42b7c17789",
+      "index": "esci-gb-v1-rc5f6d204c4467d4c49f842e3",
+      "index_recipe_sha256": "c5f6d204c4467d4c49f842e32e37e2ccd442a2211b02268440ad213cd784fa4c",
+      "judgement_manifest_sha256": "ee2c9c9cdc835604b74dd368381061f5c227689ea6ad736ed76c7b9fe25d4b8b",
+      "mapping_sha256": "d3dd2954162a449a0e9fff6f97135a9cdf474000181ede2b3283f0e60f1e7562",
+      "query_manifest_sha256": "e3da6abc3081137cf9e3c01d33d74e278a3abb2844c68a39088f6c4c49bfe0ce",
+      "request_context": {
+        "country": "GB",
+        "currency": "GBP"
+      },
+      "rewrite_dataset_sha256": "6893a8d5c147acc0f9ec46f67a696e6092c4f07b7e7bce72aa9ca0b194099f44",
+      "rewrite_redis_key": "rewrite:6893a8d5c147acc0f9ec46f67a696e6092c4f07b7e7bce72aa9ca0b194099f44",
+      "software_release_id": "93425cf714acc18952645156c294b2bbe44ac1af4b57cd9ac9d6fa904556cb0f",
+      "software_version": "1.2.3+build.207.1",
+      "source_sha": "a7cb12a20522904c4d0b51a21a5dd6f4a1c4d2a2",
+      "variant_config_json": "{\"default_variant\":\"ranker-a\",\"variants\":{\"ranker-a\":{\"field_boosts\":{\"brand\":2,\"description\":1,\"product_type\":3,\"title\":4}}}}"
+    },
+    "fingerprint": "f903b2710b148039c0470bc6de647fb2c8df491b3889b4d867dda1080d1dd0d7"
+  },
+  "evidence": {
+    "blob": "runs/ab4a9b2217a4a5688cce499ab97c01b44657db374652564fe74020a2b44c137e/delivery-variant-evidence.json",
+    "sha256": "ab4a9b2217a4a5688cce499ab97c01b44657db374652564fe74020a2b44c137e"
+  },
+  "expected_target": "611a583c798d2786f601bf0da5cc3919b9dcc221256cbf8b0163d24e392a3ed2",
+  "format": 1,
+  "kind": "promotion",
+  "release_check_plan": {
+    "head_sha": "25dcab45c454715f51fbb338c0d48b586129ea71",
+    "id": "ccdf7992cfada316825780b92c70b6b525a9eefa4333c6060a8788b34541e829",
+    "merge_sha": "22ddf797e99c859995f941de0d5d38d9408ef024",
+    "merged_at": "2026-10-16T13:52:41Z",
+    "pr": 36,
+    "review_id": 41,
+    "reviewer": "finnnk",
+    "url": "https://gitea.localhost:34443/elastic-agent/delivery-state/pulls/36"
+  },
+  "source_target": null,
+  "target": "integration",
+  "variant_checks": [
+    {
+      "evidence": {
+        "blob": "runs/63103dbf32483861928090ffb1c34e1d988d261333bc7a35a85b85ff57389ed6/delivery-evidence.json",
+        "sha256": "63103dbf32483861928090ffb1c34e1d988d261333bc7a35a85b85ff57389ed6"
+      },
+      "intent": "preserve-results",
+      "state": "pass",
+      "variant": "ranker-a"
+    }
+  ]
+}
