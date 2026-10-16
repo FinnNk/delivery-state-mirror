@@ -1,12 +1,12 @@
 {
-  "build_run": 204,
+  "build_run": 207,
   "fields": {
-    "bundle_sha256": "59c686777e16bb058d817922c37037ab07b4fd7197190077514af731a2e093dd",
+    "bundle_sha256": "2775a534d5392c5f58f1cec00172d331876fa98aa2114a36f017fce2db8277c2",
     "catalogue_manifest_sha256": "f227ec73d131c087dc5ec4dc0fe8419200c3ccb84203254b36b0d516a12647d7",
     "dataset_release": "esci-gb-v1",
     "dataset_sha256": "dfe6cecbc7d745a728fbed59679be10af0532be69583f65dc078c8108c25ff50",
     "engine": "9.5.4",
-    "image": "nexus.localhost:18185/search-api@sha256:6918b91aa88939ccff916bb5b35d4efbd22e3ad758af38659d473c59f47498fe",
+    "image": "nexus.localhost:18185/search-api@sha256:363ac36b0bc054e412d017a2c62b8f3442b3a11c3e49f93f37f19b42b7c17789",
     "index": "esci-gb-v1-rc5f6d204c4467d4c49f842e3",
     "index_recipe_sha256": "c5f6d204c4467d4c49f842e32e37e2ccd442a2211b02268440ad213cd784fa4c",
     "judgement_manifest_sha256": "ee2c9c9cdc835604b74dd368381061f5c227689ea6ad736ed76c7b9fe25d4b8b",
@@ -18,10 +18,10 @@
     },
     "rewrite_dataset_sha256": "6893a8d5c147acc0f9ec46f67a696e6092c4f07b7e7bce72aa9ca0b194099f44",
     "rewrite_redis_key": "rewrite:6893a8d5c147acc0f9ec46f67a696e6092c4f07b7e7bce72aa9ca0b194099f44",
-    "software_release_id": "b43754ebbb9d86a5481375be37e5f2d18d4cfb108a31c18f63ebb3850c1934b4",
-    "software_version": "1.2.2+build.204.1",
-    "source_sha": "c83307104982ac25099175e23a1049fcfbfa3040",
+    "software_release_id": "93425cf714acc18952645156c294b2bbe44ac1af4b57cd9ac9d6fa904556cb0f",
+    "software_version": "1.2.3+build.207.1",
+    "source_sha": "a7cb12a20522904c4d0b51a21a5dd6f4a1c4d2a2",
     "variant_config_json": "{\"default_variant\":\"ranker-a\",\"variants\":{\"ranker-a\":{\"field_boosts\":{\"brand\":2,\"description\":1,\"product_type\":3,\"title\":4}}}}"
   },
-  "fingerprint": "611a583c798d2786f601bf0da5cc3919b9dcc221256cbf8b0163d24e392a3ed2"
+  "fingerprint": "f903b2710b148039c0470bc6de647fb2c8df491b3889b4d867dda1080d1dd0d7"
 }
