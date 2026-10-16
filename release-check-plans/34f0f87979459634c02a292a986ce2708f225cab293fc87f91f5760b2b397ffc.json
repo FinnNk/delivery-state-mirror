@@ -1,0 +1,229 @@
+{
+  "additional_sets": [],
+  "edits": {
+    "additional_query_sets": [],
+    "reason": "Validate accumulated sneakers and Redis rewrite changes against active Production build 108. Include both focused sets as report only pending sufficient relevance judgements; the standard set remains mandatory.",
+    "suites": [
+      {
+        "disposition": "report_only",
+        "id": "a557588d32656913a9bdfacaf7676f3fc16db1680eeb9288b55ca2daae5e85ab",
+        "reason": ""
+      },
+      {
+        "disposition": "report_only",
+        "id": "66fd42fd03417bf0e8ef15c2a0ce941007af450ac4b23eda4fae6ee78bb48d68",
+        "reason": ""
+      }
+    ],
+    "variants": [
+      {
+        "intent": "ranking-change",
+        "variant": "ranker-a"
+      }
+    ]
+  },
+  "kind": "release-check-plan",
+  "reviewer": "finnnk",
+  "schema_version": 1,
+  "suggestion": {
+    "ancestry": {
+      "diverged": false,
+      "merge_base": "d692f7e2e5546617b806ed4561733cd845f0dfef",
+      "missing_declarations": []
+    },
+    "binding": {
+      "baseline": {
+        "build_run": 108,
+        "fields": {
+          "bundle_sha256": "7256b9411564105010473c48686fcb2e1afc1a5e1c0616d1473544c20fdc7ef1",
+          "catalogue_manifest_sha256": "f227ec73d131c087dc5ec4dc0fe8419200c3ccb84203254b36b0d516a12647d7",
+          "dataset_release": "esci-gb-v1",
+          "dataset_sha256": "dfe6cecbc7d745a728fbed59679be10af0532be69583f65dc078c8108c25ff50",
+          "engine": "9.5.4",
+          "image": "nexus.localhost:18185/search-api@sha256:07a43b5d090ebd2429ec14c9c1a2203669ae3dd9ec9d8e254ff9693945bde93a",
+          "index": "esci-gb-v1-rc5f6d204c4467d4c49f842e3",
+          "index_recipe_sha256": "c5f6d204c4467d4c49f842e32e37e2ccd442a2211b02268440ad213cd784fa4c",
+          "judgement_manifest_sha256": "ee2c9c9cdc835604b74dd368381061f5c227689ea6ad736ed76c7b9fe25d4b8b",
+          "mapping_sha256": "d3dd2954162a449a0e9fff6f97135a9cdf474000181ede2b3283f0e60f1e7562",
+          "query_manifest_sha256": "e3da6abc3081137cf9e3c01d33d74e278a3abb2844c68a39088f6c4c49bfe0ce",
+          "request_context": {
+            "country": "GB",
+            "currency": "GBP"
+          },
+          "software_release_id": "1c065c08fa95d0b2d25d9a50e5dc3a2cbf411684183e54353b183421f66d8c3d",
+          "source_sha": "d692f7e2e5546617b806ed4561733cd845f0dfef"
+        },
+        "fingerprint": "7d99e451865ef138e725c35391b0139c1ac26721b9179d8837cabdee32732031"
+      },
+      "baseline_variant": {
+        "build_run": 108,
+        "configuration_sha256": "047f11df6c57b60a0f424e185042bb91039c3c29436091f227eaafed38ed3acc",
+        "deployment_fingerprint": "7d99e451865ef138e725c35391b0139c1ac26721b9179d8837cabdee32732031",
+        "settings": {
+          "field_boosts": {
+            "brand": 2,
+            "description": 1,
+            "product_type": 3,
+            "title": 4
+          }
+        },
+        "variant": "default"
+      },
+      "candidate": {
+        "build_run": 204,
+        "fields": {
+          "bundle_sha256": "59c686777e16bb058d817922c37037ab07b4fd7197190077514af731a2e093dd",
+          "catalogue_manifest_sha256": "f227ec73d131c087dc5ec4dc0fe8419200c3ccb84203254b36b0d516a12647d7",
+          "dataset_release": "esci-gb-v1",
+          "dataset_sha256": "dfe6cecbc7d745a728fbed59679be10af0532be69583f65dc078c8108c25ff50",
+          "engine": "9.5.4",
+          "image": "nexus.localhost:18185/search-api@sha256:6918b91aa88939ccff916bb5b35d4efbd22e3ad758af38659d473c59f47498fe",
+          "index": "esci-gb-v1-rc5f6d204c4467d4c49f842e3",
+          "index_recipe_sha256": "c5f6d204c4467d4c49f842e32e37e2ccd442a2211b02268440ad213cd784fa4c",
+          "judgement_manifest_sha256": "ee2c9c9cdc835604b74dd368381061f5c227689ea6ad736ed76c7b9fe25d4b8b",
+          "mapping_sha256": "d3dd2954162a449a0e9fff6f97135a9cdf474000181ede2b3283f0e60f1e7562",
+          "query_manifest_sha256": "e3da6abc3081137cf9e3c01d33d74e278a3abb2844c68a39088f6c4c49bfe0ce",
+          "request_context": {
+            "country": "GB",
+            "currency": "GBP"
+          },
+          "rewrite_dataset_sha256": "6893a8d5c147acc0f9ec46f67a696e6092c4f07b7e7bce72aa9ca0b194099f44",
+          "rewrite_redis_key": "rewrite:6893a8d5c147acc0f9ec46f67a696e6092c4f07b7e7bce72aa9ca0b194099f44",
+          "software_release_id": "b43754ebbb9d86a5481375be37e5f2d18d4cfb108a31c18f63ebb3850c1934b4",
+          "software_version": "1.2.2+build.204.1",
+          "source_sha": "c83307104982ac25099175e23a1049fcfbfa3040",
+          "variant_config_json": "{\"default_variant\":\"ranker-a\",\"variants\":{\"ranker-a\":{\"field_boosts\":{\"brand\":2,\"description\":1,\"product_type\":3,\"title\":4}}}}"
+        },
+        "fingerprint": "611a583c798d2786f601bf0da5cc3919b9dcc221256cbf8b0163d24e392a3ed2"
+      },
+      "policy_sha256": "5e9e6e30bbaaa6e0d47482a37a948bb4ee75005ee9898c214ac3d670f6f84e63",
+      "primary_query_sets": [
+        {
+          "judgement_manifest_sha256": "ee2c9c9cdc835604b74dd368381061f5c227689ea6ad736ed76c7b9fe25d4b8b",
+          "name": "standard",
+          "query_manifest_sha256": "e3da6abc3081137cf9e3c01d33d74e278a3abb2844c68a39088f6c4c49bfe0ce"
+        }
+      ],
+      "target": "production"
+    },
+    "changes": [
+      {
+        "side": "candidate",
+        "source_sha": "0e0d29f43a821d92d472e755b13dc3fe59f389fc",
+        "title": "Improve developer examples and submit delivery operations from Actions (#27)"
+      },
+      {
+        "side": "candidate",
+        "source_sha": "715a2a3ed6df60d8acaf85cb7a767413c97dc6a4",
+        "title": "Complete Git-reviewed relevance decisions through Actions (#29)"
+      },
+      {
+        "side": "candidate",
+        "source_sha": "e5c4b1252b9728bea079091e1f2ccf20b4748f74",
+        "title": "Add copyable sneakers relevance demo snippets (#30)"
+      },
+      {
+        "side": "candidate",
+        "source_sha": "f8a8f1af3951d9f51d6c4861fca4ac49905e0a1d",
+        "title": "Explain judgement resolution for additional query sets (#32)"
+      },
+      {
+        "side": "candidate",
+        "source_sha": "0ecdcd95530edb289ab44fc2be894d523f74ffe5",
+        "title": "Rewrite sneakers searches to running shoes (#31)"
+      },
+      {
+        "side": "candidate",
+        "source_sha": "f4b2d2d70df1302223563aad1006e63bbac8dcfe",
+        "title": "Use focused delivery workflows and export search telemetry (#33)"
+      },
+      {
+        "side": "candidate",
+        "source_sha": "bb6e8a470290fe2ea5d7b45a7712535f2d78893d",
+        "title": "Adopt reviewed semantic release versions (#34)"
+      },
+      {
+        "side": "candidate",
+        "source_sha": "5b7b20d1c9e281c70d70b9e142149a86851de446",
+        "title": "Use pinned Redis rewrites with local fallback in API 1.1.0"
+      },
+      {
+        "side": "candidate",
+        "source_sha": "dfea1503bd9015e7eae51ae3e4cf91f8047888a6",
+        "title": "Use locked uv builds and add reusable seasonal query sets"
+      },
+      {
+        "side": "candidate",
+        "source_sha": "8b32d1a196d09d28fd966345a9d337e93f76aaab",
+        "title": "Release seasonal uv changes as API 1.1.1"
+      },
+      {
+        "side": "candidate",
+        "source_sha": "10c858a50d563d46101f630f825b0223379c116c",
+        "title": "Use source-controlled promotion intents (#38)"
+      },
+      {
+        "side": "candidate",
+        "source_sha": "890b616da309d34fbd4d6e99e1c0b16a5d1605bb",
+        "title": "Add storefront release footer for version 1.2.0 (#39)"
+      },
+      {
+        "side": "candidate",
+        "source_sha": "93809586ef005988b39edde4bac9a034e8d4ab8f",
+        "title": "Document reviewed checks for accumulated releases"
+      },
+      {
+        "side": "candidate",
+        "source_sha": "f85c4e7e87b4bff2321ff07c893bee22cc36384f",
+        "title": "Bump patch version for the release check plan guide"
+      },
+      {
+        "side": "candidate",
+        "source_sha": "c83307104982ac25099175e23a1049fcfbfa3040",
+        "title": "Cover every shared Redis rewrite in additional comparisons"
+      }
+    ],
+    "suites": [
+      {
+        "id": "a557588d32656913a9bdfacaf7676f3fc16db1680eeb9288b55ca2daae5e85ab",
+        "judgement_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "name": "sneakers",
+        "origins": [
+          "0ecdcd95530edb289ab44fc2be894d523f74ffe5",
+          "f4b2d2d70df1302223563aad1006e63bbac8dcfe",
+          "bb6e8a470290fe2ea5d7b45a7712535f2d78893d",
+          "5b7b20d1c9e281c70d70b9e142149a86851de446",
+          "dfea1503bd9015e7eae51ae3e4cf91f8047888a6",
+          "8b32d1a196d09d28fd966345a9d337e93f76aaab",
+          "10c858a50d563d46101f630f825b0223379c116c",
+          "890b616da309d34fbd4d6e99e1c0b16a5d1605bb",
+          "93809586ef005988b39edde4bac9a034e8d4ab8f",
+          "f85c4e7e87b4bff2321ff07c893bee22cc36384f",
+          "c83307104982ac25099175e23a1049fcfbfa3040"
+        ],
+        "path": "evaluation/queries/sneakers.jsonl",
+        "query_sha256": "dac924fff7a536191025f06b6f757de725d74a3429a6c598d7c905457f02e3e1",
+        "required": false,
+        "source_sha": "0ecdcd95530edb289ab44fc2be894d523f74ffe5"
+      },
+      {
+        "id": "66fd42fd03417bf0e8ef15c2a0ce941007af450ac4b23eda4fae6ee78bb48d68",
+        "judgement_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "name": "redis-rewrites",
+        "origins": [
+          "c83307104982ac25099175e23a1049fcfbfa3040"
+        ],
+        "path": "evaluation/queries/redis-rewrites.jsonl",
+        "query_sha256": "28dcb119704dd534329b20a85ce3ceb8ad4d146ae63524fdb70bef9c9d394a3e",
+        "required": false,
+        "source_sha": "c83307104982ac25099175e23a1049fcfbfa3040"
+      }
+    ],
+    "variants": [
+      {
+        "intent": "ranking-change",
+        "variant": "ranker-a"
+      }
+    ]
+  }
+}
